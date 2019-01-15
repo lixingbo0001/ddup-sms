@@ -1,14 +1,13 @@
 <?php
 
-namespace Providers\Sms;
+namespace Ddup\Sms;
 
 
+use Ddup\Part\Libs\Str;
 use Ddup\Sms\Config\OptionStruct;
 use Ddup\Sms\Exceptions\SmsException;
-use Providers\Sms\Contracts\SmsInterface;
+use Ddup\Sms\Contracts\SmsInterface;
 use Illuminate\Support\Facades\Redis;
-use Libs\Str;
-
 
 class SmsVerify
 {
