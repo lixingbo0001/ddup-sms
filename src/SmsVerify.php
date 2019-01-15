@@ -64,9 +64,13 @@ class SmsVerify
 
         $code = $this->getCode();
 
-        if (!$this->sms->send($number, self::$config->sign, '您的验证码是：' . $code, $params)) {
+        if (!$this->sms->send($number, '您的验证码是：' . $code, $params)) {
             throw new SmsException('短信发送失败', SmsException::sms_send_fail, [
-                'request' => $this->sms->getRequest(), 'response' => $this->sms->getResponse()
+                'request'  => [
+                    'mobile' => $number,
+                    'msg'    => '您的验证码是：' . $code
+                ],
+                'response' => $this->sms->result()->getMsg()
             ]);
         }
 

@@ -1,6 +1,13 @@
 <?php
 
-namespace Ddup\Sms\ChuangLan;
+/**
+ * User: lixingbo
+ * Description: 创蓝
+ * Date: 2019/1/15
+ * Time: 上午11:24
+ */
+
+namespace Ddup\Sms\SmsChLan;
 
 
 use Ddup\Part\Api\ApiResultInterface;
@@ -9,7 +16,7 @@ use Ddup\Part\Request\HasHttpRequest;
 use Ddup\Sms\Config\OptionStruct;
 use Ddup\Sms\Contracts\SmsInterface;
 
-class ChlSms implements SmsInterface
+class ChLanSms implements SmsInterface
 {
     use HasHttpRequest;
     use ApiResulTrait;

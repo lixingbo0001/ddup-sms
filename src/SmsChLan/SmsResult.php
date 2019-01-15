@@ -6,7 +6,7 @@
  * Time: 上午11:24
  */
 
-namespace Ddup\Sms\ChuangLan;
+namespace Ddup\Sms\SmsChLan;
 
 
 use Ddup\Part\Api\ApiResultInterface;
