@@ -5,7 +5,7 @@ use Ddup\Part\Api\ApiResultInterface;
 
 interface SmsInterface
 {
-    public function send($number, $sign, $msg);
+    public function send($number, $msg, $sign = null);
 
     function result():ApiResultInterface;
 }

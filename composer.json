@@ -8,7 +8,7 @@
   "type": "library",
   "require": {
     "illuminate/support": "^5.7",
-    "ddup/part": "dev-master"
+    "ddup/part": "^1.1"
   },
   "autoload": {
     "psr-4": {
