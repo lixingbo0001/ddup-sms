@@ -15,6 +15,7 @@ use Ddup\Part\Api\ApiResulTrait;
 use Ddup\Part\Request\HasHttpRequest;
 use Ddup\Sms\Config\OptionStruct;
 use Ddup\Sms\Contracts\SmsInterface;
+use Ddup\Sms\ServiceContainer;
 
 class ChLanSms implements SmsInterface
 {
@@ -26,10 +27,12 @@ class ChLanSms implements SmsInterface
     private $api_balance_query_url = 'msg/balance/json';
 
     private $config;
+    private $container;
 
-    public function __construct(OptionStruct $struct)
+    public function __construct(ServiceContainer $container, OptionStruct $struct)
     {
-        $this->config = $struct;
+        $this->container = $container;
+        $this->config    = $struct;
     }
 
     public function newResult($ret):ApiResultInterface

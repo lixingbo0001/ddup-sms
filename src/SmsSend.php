@@ -3,41 +3,42 @@
 namespace Ddup\Sms;
 
 
-use Ddup\Sms\Config\OptionStruct;
-use Ddup\Sms\Contracts\Cacheable;
 use Ddup\Sms\Exceptions\SmsException;
-use Ddup\Sms\Contracts\SmsInterface;
 
 class SmsSend
 {
-    public function __construct(OptionStruct $config, Cacheable $cacheable, SmsInterface $sms)
+    private $container;
+
+    public function __construct(ServiceContainer $container)
     {
-        SmsHelper::setCacher($cacheable);
-        SmsHelper::setConfig($config);
-        SmsHelper::setSms($sms);
+        $this->container;
+
+        SmsHelper::setApp($container);
     }
 
-    public function send($number, $code = null, $params = [])
+    public function send($number, $code = null)
     {
+        $api = clone SmsHelper::hander();
+
         if (SmsHelper::hasSend($number)) {
             throw new SmsException("请稍后重试");
         }
 
         $code = $code ?: SmsHelper::getCode();
 
-        if (!SmsHelper::hander()->send($number, '您的验证码是：' . $code)) {
+        if (!$api->send($number, '您的验证码是：' . $code)) {
             throw new SmsException('短信发送失败', SmsException::sms_send_fail, [
                 'request'  => [
                     'mobile' => $number,
                     'msg'    => '您的验证码是：' . $code
                 ],
-                'response' => SmsHelper::hander()->result()->getMsg()
+                'response' => $api->result()->getMsg()
             ]);
         }
 
         SmsHelper::save($number, $code);
 
-        return true;
+        return $api;
     }
 
 

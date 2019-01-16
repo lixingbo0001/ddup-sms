@@ -1,10 +1,9 @@
-<?php namespace Ddup\Sms\Test\Provider;
+<?php namespace Ddup\Sms\Providers;
 
 
-use Ddup\Part\Libs\OutCli;
 use Ddup\Sms\Contracts\Cacheable;
 
-class CacheProvider implements Cacheable
+class CacheMook implements Cacheable
 {
     private $respository = [];
 

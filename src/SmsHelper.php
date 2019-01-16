@@ -4,69 +4,33 @@ namespace Ddup\Sms;
 
 
 use Ddup\Part\Libs\Str;
-use Ddup\Sms\Config\OptionStruct;
-use Ddup\Sms\Contracts\Cacheable;
-use Ddup\Sms\Contracts\SmsInterface;
-use Ddup\Sms\Exceptions\SmsException;
 
 class SmsHelper
 {
-
-    /**
-     * @var Cacheable
-     */
-    private static $cacher;
-
-    /**
-     * @var OptionStruct
-     */
-    private static $config;
-
-    /**
-     * @var SmsInterface
-     */
-    private static $sms;
-
     private static $len = 4;
+    /**
+     * @var ServiceContainer
+     */
+    private static $app;
 
-    static function setCacher(Cacheable $cacheable)
+    static function setApp(ServiceContainer $app)
     {
-        self::$cacher = $cacheable;
-    }
-
-    private static function checkInited($provider)
-    {
-        if (!$provider) {
-            throw new SmsException('短信服务没有初始化');
-        }
+        self::$app = $app;
     }
 
     private static function cacher()
     {
-        self::checkInited(self::$cacher);
-        return self::$cacher;
+        return self::$app->cacher;
     }
 
     public static function hander()
     {
-        self::checkInited(self::$sms);
-        return self::$sms;
+        return self::$app->sms;
     }
 
     private static function config()
     {
-        self::checkInited(self::$config);
-        return self::$config;
-    }
-
-    static function setSms(SmsInterface $sms)
-    {
-        self::$sms = $sms;
-    }
-
-    static function setConfig(OptionStruct $config)
-    {
-        self::$config = $config;
+        return self::$app->config;
     }
 
     static function getCode()
