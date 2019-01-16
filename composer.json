@@ -8,11 +8,12 @@
   "type": "library",
   "require": {
     "illuminate/support": "^5.7",
-    "ddup/part": "^1.0"
+    "ddup/part": "dev-master"
   },
   "autoload": {
     "psr-4": {
-      "Ddup\\Sms\\": "src"
+      "Ddup\\Sms\\": "src",
+      "Ddup\\Sms\\Test\\": "test"
     }
   },
   "require-dev": {

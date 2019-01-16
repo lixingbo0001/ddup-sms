@@ -11,6 +11,7 @@ namespace Ddup\Sms\SmsChLan;
 
 use Ddup\Part\Api\ApiResultInterface;
 use Ddup\Part\Libs\Helper;
+use Illuminate\Support\Collection;
 
 class SmsResult implements ApiResultInterface
 {
@@ -27,7 +28,7 @@ class SmsResult implements ApiResultInterface
         return $this->_result->get('errorMsg');
     }
 
-    public function getData()
+    public function getData():Collection
     {
         return $this->_result;
     }
