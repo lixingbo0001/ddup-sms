@@ -18,6 +18,6 @@ class ChuanglangTest extends TestCase
 
         $api->send(self::mobile, '登高一呼时才懂，始终在为你心痛');
 
-        $this->assertTrue($api->result->isSuccess(), $api->result->getMsg());
+        $this->assertTrue($api->result()->isSuccess(), $api->result()->getMsg());
     }
 }

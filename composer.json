@@ -7,9 +7,9 @@
   ],
   "type": "library",
   "require": {
+    "ddup/part": "^1.1",
     "illuminate/support": "^5.7",
     "pimple/pimple": "^3.2",
-    "ddup/part": "^1.1",
     "ddup/logger": "^1.0"
   },
   "autoload": {

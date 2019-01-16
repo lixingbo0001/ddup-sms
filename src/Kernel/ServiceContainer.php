@@ -1,6 +1,6 @@
 <?php
 
-namespace Ddup\Sms;
+namespace Ddup\Sms\Kernel;
 
 use Ddup\Sms\Config\Config;
 use Ddup\Sms\Contracts\Cacheable;

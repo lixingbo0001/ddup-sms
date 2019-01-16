@@ -8,9 +8,7 @@
 
 namespace Ddup\Sms\Test;
 
-use Ddup\Sms\Test\Providers\CacheProviderService;
-use Ddup\Sms\Test\Providers\LogProviderService;
-use Ddup\Sms\ServiceContainer;
+use Ddup\Sms\Kernel\ServiceContainer;
 use Ddup\Sms\Test\Providers\SmsProviderService;
 
 class TestCase extends \PHPUnit\Framework\TestCase
@@ -29,8 +27,6 @@ class TestCase extends \PHPUnit\Framework\TestCase
         $container = new ServiceContainer();
 
         $container->registerProviders([
-            CacheProviderService::class,
-            LogProviderService::class,
             SmsProviderService::class
         ]);
 

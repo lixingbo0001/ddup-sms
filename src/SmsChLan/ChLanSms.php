@@ -11,28 +11,25 @@ namespace Ddup\Sms\SmsChLan;
 
 
 use Ddup\Part\Api\ApiResultInterface;
-use Ddup\Part\Api\ApiResulTrait;
-use Ddup\Part\Request\HasHttpRequest;
 use Ddup\Sms\Config\OptionStruct;
 use Ddup\Sms\Contracts\SmsInterface;
-use Ddup\Sms\ServiceContainer;
+use Ddup\Sms\Kernel\BaseClient;
+use Ddup\Sms\Kernel\ServiceContainer;
 
-class ChLanSms implements SmsInterface
+class ChLanSms extends BaseClient implements SmsInterface
 {
-    use HasHttpRequest;
-    use ApiResulTrait;
 
     private $api_send_url          = 'msg/send/json';
     private $api_var_url           = 'msg/variable/json';
     private $api_balance_query_url = 'msg/balance/json';
 
     private $config;
-    private $container;
 
     public function __construct(ServiceContainer $container, OptionStruct $struct)
     {
-        $this->container = $container;
-        $this->config    = $struct;
+        $this->config = $struct;
+
+        parent::__construct($container);
     }
 
     public function newResult($ret):ApiResultInterface

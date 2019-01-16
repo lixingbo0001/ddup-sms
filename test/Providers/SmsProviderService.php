@@ -3,8 +3,10 @@
 namespace Ddup\Sms\Test\Providers;
 
 
+use Ddup\Logger\Cli\CliLogger;
 use Ddup\Sms\Config\OptionStruct;
-use Ddup\Sms\ServiceContainer;
+use Ddup\Sms\Providers\CacheMook;
+use Ddup\Sms\Kernel\ServiceContainer;
 use Ddup\Sms\SmsChLan\ChLanSms;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
@@ -14,6 +16,14 @@ class SmsProviderService implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         if ($pimple instanceof ServiceContainer) {
+
+            $pimple->cacher = (function () {
+                return new CacheMook();
+            });
+
+            $pimple->logger = (function () {
+                return new CliLogger();
+            });
 
             $config = new OptionStruct([
                 'expires'  => 60,
