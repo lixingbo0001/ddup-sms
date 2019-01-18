@@ -8,11 +8,11 @@ use Ddup\Sms\Kernel\ServiceContainer;
 
 class SmsHelper
 {
-    private static $len = 4;
     /**
      * @var ServiceContainer
      */
     private static $app;
+    private static $len = 4;
 
     static function setApp(ServiceContainer $app)
     {
