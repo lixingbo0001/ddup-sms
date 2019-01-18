@@ -23,20 +23,11 @@ class ServiceContainer extends Container
      */
     protected $providers = [];
 
-    /**
-     * Constructor.
-     *
-     * @param array $config
-     * @param array $prepends
-     * @param string|null $id
-     */
-    public function __construct(array $config = [], array $prepends = [])
+    public function __construct(array $prepends = [])
     {
         $this->registerProviders($this->getProviders());
 
         parent::__construct($prepends);
-
-        $this->userConfig = $config;
     }
 
     /**

@@ -5,6 +5,7 @@ use Ddup\Part\Api\ApiResulTrait;
 use Ddup\Part\Request\HasHttpRequest;
 use GuzzleHttp\MessageFormatter;
 use GuzzleHttp\Middleware;
+use Psr\Log\LogLevel;
 
 abstract class BaseClient
 {
@@ -23,9 +24,9 @@ abstract class BaseClient
 
     private function logMiddleware()
     {
-        $formatter = new MessageFormatter('request => {request}');
+        $formatter = new MessageFormatter('{url} {method} {req_body}');
 
-        return Middleware::log($this->container->logger, $formatter);
+        return Middleware::log($this->container->logger, $formatter, LogLevel::DEBUG);
     }
 
     private function registerMiddleware()
