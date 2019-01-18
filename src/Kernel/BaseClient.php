@@ -26,7 +26,7 @@ abstract class BaseClient
     {
         $formatter = new MessageFormatter('{url} {method} {req_body}');
 
-        return Middleware::log($this->container->logger, $formatter, LogLevel::DEBUG);
+        return Middleware::log($this->container->logger, $formatter);
     }
 
     private function registerMiddleware()
