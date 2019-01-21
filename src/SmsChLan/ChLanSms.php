@@ -13,10 +13,9 @@ namespace Ddup\Sms\SmsChLan;
 use Ddup\Part\Api\ApiResultInterface;
 use Ddup\Sms\Config\OptionStruct;
 use Ddup\Sms\Contracts\SmsInterface;
-use Ddup\Sms\Kernel\BaseClient;
 use Ddup\Sms\Kernel\ServiceContainer;
 
-class ChLanSms extends BaseClient implements SmsInterface
+class ChLanSms implements SmsInterface
 {
 
     private $api_send_url          = 'msg/send/json';
@@ -24,44 +23,17 @@ class ChLanSms extends BaseClient implements SmsInterface
     private $api_balance_query_url = 'msg/balance/json';
 
     private $config;
+    private $client;
 
     public function __construct(ServiceContainer $container, OptionStruct $struct)
     {
         $this->config = $struct;
-
-        parent::__construct($container);
+        $this->client = new ChLanClient($container, $struct);
     }
 
-    public function newResult($ret):ApiResultInterface
+    public function result():ApiResultInterface
     {
-        return new SmsResult($ret);
-    }
-
-    public function getTimeout()
-    {
-        return $this->config->timeout;
-    }
-
-    public function getBaseUri()
-    {
-        return $this->config->host;
-    }
-
-    public function requestOptions()
-    {
-        return [
-            'headers' => [
-                'content-type' => 'application/json'
-            ]
-        ];
-    }
-
-    public function requestParams()
-    {
-        return [
-            'account'  => $this->config->account,
-            'password' => $this->config->password
-        ];
+        return $this->client->result();
     }
 
     public function sendVariable($msg, $params)
@@ -72,12 +44,12 @@ class ChLanSms extends BaseClient implements SmsInterface
             'params' => $params
         ];
 
-        return $this->parseResult($this->json($this->api_var_url, $post_data));
+        return $this->client->json($this->api_var_url, $post_data);
     }
 
     public function queryBalance()
     {
-        return $this->parseResult($this->json($this->api_balance_query_url, []));
+        return $this->client->json($this->api_balance_query_url, []);
     }
 
     private function sign($sign)
@@ -95,6 +67,6 @@ class ChLanSms extends BaseClient implements SmsInterface
             'phone'  => $number
         ];
 
-        return $this->parseResult($this->json($this->api_send_url, $post_data));
+        return $this->client->json($this->api_send_url, $post_data);
     }
 }

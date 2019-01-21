@@ -14,7 +14,7 @@ use Ddup\Part\Libs\Helper;
 use Ddup\Part\Libs\OutCli;
 use Illuminate\Support\Collection;
 
-class SmsResult implements ApiResultInterface
+class ChLanSmsResult implements ApiResultInterface
 {
 
     private $_result;
