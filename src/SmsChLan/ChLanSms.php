@@ -67,6 +67,8 @@ class ChLanSms implements SmsInterface
             'phone'  => $number
         ];
 
-        return $this->client->json($this->api_send_url, $post_data);
+        $this->client->json($this->api_send_url, $post_data);
+
+        return $this->result()->isSuccess();
     }
 }

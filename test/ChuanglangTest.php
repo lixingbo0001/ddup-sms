@@ -16,7 +16,9 @@ class ChuanglangTest extends TestCase
             'host'     => 'http://smssh1.253.com',
         ]));
 
-        $api->send(self::mobile, '登高一呼时才懂，始终在为你心痛');
+        $is_success = $api->send(self::mobile, '登高一呼时才懂，始终在为你心痛');
+
+        $this->assertTrue($is_success);
 
         $this->assertTrue($api->result()->isSuccess(), $api->result()->getMsg());
     }
