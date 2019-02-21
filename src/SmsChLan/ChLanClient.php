@@ -67,4 +67,13 @@ class ChLanClient extends BaseClient
         return $ret;
     }
 
+    public function json($endpoint, $data, $query = [])
+    {
+        $ret = parent::json($endpoint, $data, $query);
+
+        $this->parseResult($ret);
+
+        return $ret;
+    }
+
 }
