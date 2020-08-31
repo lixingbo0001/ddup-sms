@@ -11,7 +11,6 @@ namespace Ddup\Sms\SmsChLan;
 
 use Ddup\Part\Api\ApiResultInterface;
 use Ddup\Part\Libs\Helper;
-use Ddup\Part\Libs\OutCli;
 use Illuminate\Support\Collection;
 
 class ChLanSmsResult implements ApiResultInterface
@@ -21,7 +20,6 @@ class ChLanSmsResult implements ApiResultInterface
 
     public function __construct($response)
     {
-        OutCli::printLn($response);
 
         $this->_result = Helper::toCollection($response);
     }
